@@ -34,4 +34,10 @@ module.exports = {
             .catch(() => res.json({ error: "Edit Client error" }))
         res.json(updatedClient);
     },
+
+    delete: async (req, res) => {
+        await Client.findByIdAndDelete(req.params.id)
+            .catch(() => res.json({ error: "Delete client error" }))
+        res.json({ deleted: true });
+    }
 }

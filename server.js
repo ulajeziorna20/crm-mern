@@ -10,6 +10,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
+const UserApiRouter = require('./routes/UserApiRoutes');
+
+app.use('/user/', UserApiRouter);
+
 
 
 app.listen(8001, () => {

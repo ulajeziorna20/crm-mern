@@ -8,6 +8,7 @@ const authHelper = require("../middlewares/AuthApiHelper");
 router.get('/', authHelper, ClientsApiController.index);
 router.get('/:id', authHelper, ClientsApiController.oneClient);
 
-
+router.post('/', authHelper, ClientsApiController.addClient);
+router.put('/:id', authHelper, ClientsApiController.edit);
 
 module.exports = router;

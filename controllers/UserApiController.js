@@ -19,4 +19,33 @@ module.exports = {
             });
     },
 
+    login: async (req, res) => {
+        await User.findOne({ email: req.body.email })
+            .catch(() => res.json({ error: 'error' }))
+            .then((user) => {
+                if (!user) {
+                    res.json({
+                        error: true,
+                        message: "User doesn't exist"
+                    });
+                    return;
+                } else {
+                    if (req.body.password === user.password) {
+                        const token = user.generateAuthToken(user);
+
+                        res.json({
+                            email: user.email,
+                            jwt: token
+                        });
+                    } else {
+                        res.json({
+                            error: true,
+                            message: "Incorrect login or password"
+                        });
+                        return;
+                    }
+                }
+            })
+    }
+
 };
